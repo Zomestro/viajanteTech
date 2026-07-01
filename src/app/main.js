@@ -15,4 +15,4 @@ const BASE_URL ="https://api.weatherapi.com/v1";
 *   @param {boolean} includeAqi - Inclui dados de qualidade do ar
 *   @returns {Promise<Object>} Dados meteorológicos
 */
-
+// API Viagens
