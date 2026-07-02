@@ -4,48 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta author="Emerson Moron Rosa, Italo Araujo Santos, Daniel de Lima Pereira">
-    <title>Planejador de viagem</title>
+    <title>Tela de Abertura</title>
     <link rel="stylesheet" href="../css/style.css">
-    </head>
-<body>
-    <main>
-        <h1>Planejador de viagem</h1>
-        <section id="cidades">
-            <h3>Dados da viagem</h3>
-            <label for="origem">Digite a cidade de origem:</label>
-            <input type="text" id="origem">
-            <br><br>
-            <label for="destino">Digite a cidade de destino:</label>
-            <input type="text" maxlength="50" id="destino">
-            <br>
-        </section>
-        <hr>
-        <section id="datas">
-            <h3>Período</h3>
-            <label for="data-inicio">Digite a data de início:</label>
-            <input type="date" id="data-inicio">
-            <br><br>
-            <label for="data-fim">Digite a data de fim:</label>
-            <input type="date" id="data-fim">
-            <br><br>
-             <button onclick="clima()">Busca previsão do tempo</button>
-             <button onclick="gera_resumo()">Gerar resumo</button>
-        </section>
+</head>
+<body class="home-page">
+    <div class="container">
+        <h1>Bem-vindo ao TRIP PLANNER</h1>
+        <button id="btn-iniciar" target="_blank">Iniciar</button>
+    </div>
 
-       
-        <hr>
-        <section id="resumo">
-            <h3>Resumo da viagem</h3>
-            <p>Sua viagem saindo de <span id="origem"></span> e indo para <span id="destino"></span></p> com partida em
-            <span id="data-inicio"></span> e retorno em <span id="data-fim"></span>.
-            Tem previsão de <span id="previsao"></span> durante a viagem.
-           
-        </section>
-        
-         <script src="js/funcoes.js"></script>
+<script>
+  document.getElementById("btn-iniciar").addEventListener("click", function() {
+    // Cria o objeto de áudio
+    var audio = new Audio("../midia/win31.mp3"); 
+    audio.play();
 
-           
-        </main>
+    // Aguarda o áudio começar e depois redireciona
+    audio.onended = function() {
+      window.location.href = "page2.html";
+    };
+  });
+</script>
+
     
 </body>
 </html>
+
+ 
