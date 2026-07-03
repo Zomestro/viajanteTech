@@ -4,10 +4,40 @@
  * Sign up free: https://www.weatherapi.com/signup.aspx
  * https://github.com/weatherapicom/weatherapi-examples/blob/main/javascript/current.js
 */
-
 const API_KEY = "a47b53784e9541c8a0101129260107"; 
 const BASE_URL ="https://api.weatherapi.com/v1"; 
 
+/**
+ * Valida os campos de entrada do formulário
+ * @param {string} origin - Local de origem
+ * @param {string} location - Local de destino
+ * @param {string} initialDate - Data de ida
+ * @param {string} finalDate - Data de volta
+ * @param {number} differenceDays - Diferença em dias entre ida e volta
+ * @returns{Error} Lança um erro se algum campo for inválido
+ */
+async function validateFields(origin, location, initialDate, finalDate, differenceDays) {
+    const dataInicio = new Date(initialDate + 'T00:00:00');
+    const dataFim = new Date(finalDate + 'T00:00:00');
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Define a hora para 00:00:00 para comparar apenas a data
+    
+    if (dataInicio < today) {
+        throw new Error('A data de ida não pode ser anterior à data atual.');
+    }
+    if (dataFim < today) {
+        throw new Error('A data de volta não pode ser anterior à data atual.');
+    }
+    if (!origin || !location || !initialDate || !finalDate) {
+        throw new Error('Todos os campos são obrigatórios.');
+    }
+    if (differenceDays < 0) {
+        throw new Error('A data de volta não pode ser anterior à data de ida.');
+    }
+    if (differenceDays > 14) {
+        throw new Error('A diferença entre as datas não pode ser superior a 14 dias.');
+    }
+}
 
 /* *
 *   Obtém as condições meteorológicas atuais de um local
@@ -90,8 +120,6 @@ async function historySave(origin, location, initialDate, finalDate, differenceD
   return datasList; 
 }
 
-
-
 /** * Função principal que obtém os dados de viagem e clima, e salva no histórico
  * @returns {Promise<void>}
  */
@@ -99,10 +127,13 @@ async function main() {
     try{
         const origin = document.getElementById("origem").value;
         const location = document.getElementById("destino").value;
-        const initialDate = document.getElementById("data-inicio").value;
-        const finalDate= document.getElementById("data-fim");
+        const initialDate = document.getElementById("data-inicio").min = new Date().toISOString().split("T")[0]; // Define a data mínima como a data atual
+        const finalDate= document.getElementById("data-fim").min = new Date().toISOString().split("T")[0]; // Define a data mínima como a data atual
         const differenceDays = finalDate-initialDate;
         
+        // Valida os campos de entrada
+        await validateFields(origin, location, initialDate, finalDate, differenceDays);
+
         // Obtém as condições meteorológicas atuais do local
         const current = await getCurrentWeather(location);
         const {location, current: weather } = current;
