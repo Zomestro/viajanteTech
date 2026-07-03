@@ -38,15 +38,7 @@ Além de consultar as condições climáticas atuais e a previsão para os dias 
 ---
 
 ## 📂 Estrutura do projeto
-
-```text
-📁 projeto
-│
-├── index.html
-├── style.css
-├── script.js
-└── README.md
-```
+<img width="246" height="270" alt="image" src="https://github.com/user-attachments/assets/b35c9472-99fa-4c74-82c1-d536884e14f9" />
 
 ---
 
