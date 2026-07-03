@@ -57,10 +57,34 @@ async function getForecast(location, days) {
     return response.json();
 }
 
+// Funcao Salvar Dados em lista localStorage
+async function historySave(origin, location, initialDate, finalDate, differenceDays, weather)  {
+  let dataObj = {
+    Origem: origin,
+    Cidade: location.name,
+    DataIda: initialDate,
+    DataVolta: finalDate,
+    Dias = {
+        Dias: differenceDays,
+        Condicao: weather.condition.text,
+        Temp: weather.temp_c,
+        TempMin: weather.mintemp_c,
+        TempMax: weather.maxtemp_c,
+        Chuva: weather.daily_chance_of_rain,
+        Vento: weather.wind_kph,
+        UV: weather.uv
+    }  
+  };
+  
+  
+}
+
+
 
 // Personaliza main conforme requisitos
 async function main() {
     try{
+        const origin = document.getElementById("origem").value;
         const location = document.getElementById("destino").value;
         const initialDate = document.getElementById("data-inicio").value;
         const finalDate= document.getElementById("data-fim");
@@ -73,14 +97,20 @@ async function main() {
         // Clima do destino
         const forecast = await getForecast(location.name, differenceDays);
         forecast.forecast.forecastday.forEach((day) => {
-            // voltar dados previsão de tempo 
+            day.date;
+            day.day.condition.text;
+            day.day.maxtemp_c;
+            day.day.mintemp_c;
+            day.day.wind_kph;
+            day.day.daily_chance_of_rain; 
+            day.day.uv;
         }); 
         
-        let 
+        let datasList = await historySave(origin, location, initialDate, finalDate, differenceDays, weather) || [];
+        
     } catch (error) {
         alert('Error:', error.message);
     }
 }
-
 
 main();
